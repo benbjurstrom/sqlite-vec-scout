@@ -1,4 +1,4 @@
-<p align="center"><img src="https://github.com/user-attachments/assets/9c55eb67-f44f-442d-86b9-e0969213862c" width="600" alt="Logo"></a></p>
+<p align="center"><img src="https://github.com/user-attachments/assets/4ef54415-e0be-4301-ab2e-98b39cceae12" width="600" alt="Logo"></a></p>
 
 <p align="center">
 <a href="https://packagist.org/packages/benbjurstrom/sqlite-vec-scout"><img src="https://img.shields.io/packagist/v/benbjurstrom/sqlite-vec-scout.svg?style=flat-square" alt="Latest Version on Packagist"></a>
