@@ -8,9 +8,7 @@
 
 # sqlite-vec driver for Laravel Scout
 
-Use the sqlite-vec extension with Laravel Scout for vector similarity search.
-
-To see a full example showing how to use this package check out [benbjurstrom/sqlite-vec-scout-demo](https://github.com/benbjurstrom/sqlite-vec-scout-demo).
+Use the [sqlite-vec](https://github.com/asg017/sqlite-vec) extension with Laravel Scout for vector similarity search.
 
 ## 🚀 Quick Start
 
