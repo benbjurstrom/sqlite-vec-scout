@@ -1,0 +1,36 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        Schema::create('fake_embeddings', function (Blueprint $table) {
+            $table->id();
+            $table->morphs('embeddable');
+            $table->string('embedding_model');
+            $table->uuid('content_hash');
+            $table->text('vector');
+            $table->boolean('__soft_deleted')->default(0);
+            $table->timestamps();
+
+            // Add indexes
+            $table->index(['content_hash']);
+            $table->unique(['embeddable_type', 'embeddable_id']);
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::dropIfExists('fake_embeddings');
+    }
+};

@@ -1,4 +1,4 @@
-<p align="center"><img src="https://github.com/user-attachments/assets/9c55eb67-f44f-442d-86b9-e0969213862c" width="600" alt="Logo"></a></p>
+<p align="center"><img src="https://github.com/user-attachments/assets/4ef54415-e0be-4301-ab2e-98b39cceae12" width="600" alt="Logo"></a></p>
 
 <p align="center">
 <a href="https://packagist.org/packages/benbjurstrom/sqlite-vec-scout"><img src="https://img.shields.io/packagist/v/benbjurstrom/sqlite-vec-scout.svg?style=flat-square" alt="Latest Version on Packagist"></a>
@@ -8,9 +8,7 @@
 
 # sqlite-vec driver for Laravel Scout
 
-Use the sqlite-vec extension with Laravel Scout for vector similarity search.
-
-To see a full example showing how to use this package check out [benbjurstrom/sqlite-vec-scout-demo](https://github.com/benbjurstrom/sqlite-vec-scout-demo).
+Use the [sqlite-vec](https://github.com/asg017/sqlite-vec) extension with Laravel Scout for vector similarity search.
 
 ## 🚀 Quick Start
 
@@ -179,9 +177,9 @@ Whatever api calls or logic is needed to turn a string into a vector should be d
 If you need to pass api keys, embedding dimensions, or any other configuration to your handler you can define them in the `config/sqlite-vec-scout.php` file.
 
 ## Installing sqlite-vec locally
-`sqlite-vec-scout` no longer provides a PHP fallback for vector math – the native `sqlite-vec` extension **must** be loaded on the same SQLite connection that Laravel uses. The service provider validates this at boot time and will throw a runtime exception if `vec0` is unavailable.
+The native `sqlite-vec` extension **must** be loaded on the same SQLite connection that Laravel uses. The service provider validates this at boot time and will throw a runtime exception if `vec0` is unavailable.
 
-`sqlite-vec` ships as a small SQLite extension that can be compiled from source or installed via language-specific packages. The official project maintains [comprehensive installation docs](./sqlite-vec%20docs/README.md) that cover macOS, Linux, Windows, and WebAssembly builds. For PHP-specific guidance on compiling binaries with extension loading enabled — including a full static-php-cli build script — read Ben Bjurstrom's guide: <https://benbjurstrom.com/sqlite-vec-php>.
+`sqlite-vec` ships as a small SQLite extension that can be compiled from source or installed via language-specific packages. For PHP-specific guidance on compiling binaries with extension loading enabled — including a full static-php-cli build script — read Ben Bjurstrom's guide: <https://benbjurstrom.com/sqlite-vec-php>.
 
 To see if your current PHP binary can load extensions dynamically run:
 
