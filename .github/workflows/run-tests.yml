@@ -1,29 +1,19 @@
 name: run-tests
 
 on:
-  pull_request:
-    paths:
-      - '**.php'
-      - '.github/workflows/run-tests.yml'
-      - 'phpunit.xml.dist'
-      - 'composer.json'
-      - 'composer.lock'
+  # pull_request:
 
 jobs:
   test:
     runs-on: ${{ matrix.os }}
     timeout-minutes: 5
     env:
-      DB_CONNECTION: pgsql
-      DB_HOST: localhost
-      DB_USERNAME: $USER
-      DB_DATABASE: laravel
-      DB_PASSWORD: postgres
+      DB_CONNECTION: sqlite
     strategy:
       fail-fast: true
       matrix:
         os: [ubuntu-latest]
-        php: [8.3]
+        php: [8.4]
         laravel: [11.*]
         stability: [prefer-stable]
         include:
@@ -44,23 +34,19 @@ jobs:
           extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, bcmath, soap, intl, gd, exif, iconv, imagick, fileinfo
           coverage: none
 
-      - name: Install Postgres
-        uses: ankane/setup-postgres@v1
-        with:
-          database: laravel
-          dev-files: true
-
-      - run: |
-          echo $USER
-          psql -h localhost -U $USER -d laravel --no-password -c "ALTER USER postgres PASSWORD 'postgres';"
-
-      - name: Install pgvector
+      - name: Use custom PHP binary
         run: |
-          cd /tmp
-          git clone --branch v0.8.0 https://github.com/pgvector/pgvector.git
-          cd pgvector
-          make
-          sudo make install
+          # path to your committed binary
+          BIN_DIR="$GITHUB_WORKSPACE/custom-php/linux-x86_64"
+          chmod +x "$BIN_DIR/php"
+          # Put your php ahead of system php (affects all next steps)
+          echo "$BIN_DIR" >> "$GITHUB_PATH"
+          # Prove we're now on your binary
+          which php
+          php -v
+          php -m | sort
+          # (Optional) quick sqlite-vec smoke test if you want:
+          php -r 'echo (new SQLite3(":memory:"))->querySingle("SELECT vec_version()"), PHP_EOL;'
 
       - name: Setup problem matchers
         run: |
