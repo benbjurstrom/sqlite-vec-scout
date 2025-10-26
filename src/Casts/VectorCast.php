@@ -8,6 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 use InvalidArgumentException;
 use RuntimeException;
 
+/**
+ * @implements CastsAttributes<Vector|null, string|null>
+ */
 class VectorCast implements CastsAttributes
 {
     /**
@@ -31,6 +34,7 @@ class VectorCast implements CastsAttributes
     }
 
     /**
+     * @param  Vector|array<int|float>|string|null  $value
      * @param  array<string, mixed>  $attributes
      */
     public function set(Model $model, string $key, mixed $value, array $attributes): ?string
@@ -56,6 +60,7 @@ class VectorCast implements CastsAttributes
             }
         }
 
+        // @phpstan-ignore-next-line
         throw new InvalidArgumentException('Unable to set vector attribute from given value.');
     }
 }

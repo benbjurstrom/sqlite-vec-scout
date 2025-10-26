@@ -102,7 +102,8 @@ class SqliteVecScoutServiceProvider extends PackageServiceProvider
             return;
         }
 
-        $pdo = $connection->getPdo();
+        /** @var \PDO $pdo */
+        $pdo = $connection->getPdo(); // @phpstan-ignore method.notFound
 
         if (! method_exists($pdo, 'loadExtension')) {
             throw new RuntimeException(
