@@ -177,9 +177,9 @@ Whatever api calls or logic is needed to turn a string into a vector should be d
 If you need to pass api keys, embedding dimensions, or any other configuration to your handler you can define them in the `config/sqlite-vec-scout.php` file.
 
 ## Installing sqlite-vec locally
-`sqlite-vec-scout` no longer provides a PHP fallback for vector math – the native `sqlite-vec` extension **must** be loaded on the same SQLite connection that Laravel uses. The service provider validates this at boot time and will throw a runtime exception if `vec0` is unavailable.
+The native `sqlite-vec` extension **must** be loaded on the same SQLite connection that Laravel uses. The service provider validates this at boot time and will throw a runtime exception if `vec0` is unavailable.
 
-`sqlite-vec` ships as a small SQLite extension that can be compiled from source or installed via language-specific packages. The official project maintains [comprehensive installation docs](./sqlite-vec%20docs/README.md) that cover macOS, Linux, Windows, and WebAssembly builds. For PHP-specific guidance on compiling binaries with extension loading enabled — including a full static-php-cli build script — read Ben Bjurstrom's guide: <https://benbjurstrom.com/sqlite-vec-php>.
+`sqlite-vec` ships as a small SQLite extension that can be compiled from source or installed via language-specific packages. For PHP-specific guidance on compiling binaries with extension loading enabled — including a full static-php-cli build script — read Ben Bjurstrom's guide: <https://benbjurstrom.com/sqlite-vec-php>.
 
 To see if your current PHP binary can load extensions dynamically run:
 
