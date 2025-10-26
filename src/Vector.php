@@ -59,7 +59,8 @@ class Vector implements \JsonSerializable
     /**
      * Create vector from JSON string
      *
-     * @param string $json JSON array string like "[1.0, 2.0, 3.0]"
+     * @param  string  $json  JSON array string like "[1.0, 2.0, 3.0]"
+     *
      * @throws RuntimeException if JSON is invalid
      */
     public static function fromJson(string $json): self
@@ -67,13 +68,13 @@ class Vector implements \JsonSerializable
         try {
             $values = json_decode($json, true, flags: JSON_THROW_ON_ERROR);
 
-            if (!is_array($values)) {
+            if (! is_array($values)) {
                 throw new RuntimeException('JSON must represent an array of numbers.');
             }
 
             return new self($values);
         } catch (JsonException $exception) {
-            throw new RuntimeException('Invalid vector JSON: ' . $exception->getMessage(), previous: $exception);
+            throw new RuntimeException('Invalid vector JSON: '.$exception->getMessage(), previous: $exception);
         }
     }
 

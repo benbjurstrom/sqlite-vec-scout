@@ -4,10 +4,10 @@ namespace BenBjurstrom\SqliteVecScout\Handlers;
 
 use BenBjurstrom\SqliteVecScout\HandlerContract;
 use BenBjurstrom\SqliteVecScout\IndexConfig;
+use BenBjurstrom\SqliteVecScout\Vector;
 use Illuminate\Http\Client\Response;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Http;
-use BenBjurstrom\SqliteVecScout\Vector;
 use RuntimeException;
 
 class GeminiHandler implements HandlerContract

@@ -4,10 +4,10 @@ namespace BenBjurstrom\SqliteVecScout\Actions;
 
 use BenBjurstrom\SqliteVecScout\IndexConfig;
 use BenBjurstrom\SqliteVecScout\Models\Embedding;
+use BenBjurstrom\SqliteVecScout\Vector;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
-use BenBjurstrom\SqliteVecScout\Vector;
 
 class CreateEmbedding
 {

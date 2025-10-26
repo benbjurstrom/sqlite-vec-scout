@@ -2,8 +2,6 @@
 
 namespace BenBjurstrom\SqliteVecScout;
 
-use BenBjurstrom\SqliteVecScout\Vector;
-
 interface HandlerContract
 {
     /**

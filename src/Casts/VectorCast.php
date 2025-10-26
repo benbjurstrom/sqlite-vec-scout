@@ -52,7 +52,7 @@ class VectorCast implements CastsAttributes
             try {
                 return Vector::fromJson($value)->toJson();
             } catch (RuntimeException $e) {
-                throw new InvalidArgumentException('Invalid vector JSON: ' . $e->getMessage(), previous: $e);
+                throw new InvalidArgumentException('Invalid vector JSON: '.$e->getMessage(), previous: $e);
             }
         }
 

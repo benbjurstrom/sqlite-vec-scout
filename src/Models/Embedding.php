@@ -21,7 +21,6 @@ use Illuminate\Support\Carbon;
  * */
 class Embedding extends Model
 {
-
     /**
      * The attributes that are mass assignable.
      *

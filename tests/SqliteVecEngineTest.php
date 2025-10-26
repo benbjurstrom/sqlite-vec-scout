@@ -5,11 +5,11 @@ use BenBjurstrom\SqliteVecScout\Models\Embedding;
 use BenBjurstrom\SqliteVecScout\SqliteVecEngine;
 use BenBjurstrom\SqliteVecScout\Tests\Support\Models\Review;
 use BenBjurstrom\SqliteVecScout\Tests\Support\Models\ReviewSoftDelete;
+use BenBjurstrom\SqliteVecScout\Vector;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\LazyCollection;
-use BenBjurstrom\SqliteVecScout\Vector;
 use Ramsey\Uuid\Uuid;
 
 beforeEach(function () {
