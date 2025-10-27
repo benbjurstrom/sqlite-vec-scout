@@ -27,13 +27,6 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Setup PHP
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: ${{ matrix.php }}
-          extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, bcmath, soap, intl, gd, exif, iconv, imagick, fileinfo
-          coverage: none
-
       - name: Unzip custom PHP binary
         run: |
           cd "$GITHUB_WORKSPACE/custom-php"
@@ -61,6 +54,14 @@ jobs:
           php -v
           php -m | grep -i sqlite
           php -r 'echo (new SQLite3(":memory:"))->querySingle("SELECT vec_version()"), PHP_EOL;'
+
+      - name: Install Composer
+        run: |
+          php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+          php composer-setup.php --quiet
+          php -r "unlink('composer-setup.php');"
+          sudo mv composer.phar /usr/local/bin/composer
+          composer --version
 
       - name: Setup problem matchers
         run: |
