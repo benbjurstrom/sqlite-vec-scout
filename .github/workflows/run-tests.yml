@@ -1,7 +1,7 @@
 name: run-tests
 
 on:
-  workflow_call:
+  pull_request:
 
 jobs:
   test:
@@ -33,6 +33,11 @@ jobs:
           php-version: ${{ matrix.php }}
           extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, bcmath, soap, intl, gd, exif, iconv, imagick, fileinfo
           coverage: none
+
+      - name: Unzip custom PHP binary
+        run: |
+          cd "$GITHUB_WORKSPACE/custom-php"
+          unzip -q php-cli-8.4-linux-x86_64.zip -d linux-x86_64
 
       - name: Use custom PHP binary
         run: |
