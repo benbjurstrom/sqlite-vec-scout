@@ -1,7 +1,7 @@
 name: run-tests
 
 on:
-  workflow_call:
+  pull_request:
 
 jobs:
   test:
@@ -27,19 +27,18 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Setup PHP
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: ${{ matrix.php }}
-          extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, bcmath, soap, intl, gd, exif, iconv, imagick, fileinfo
-          coverage: none
+      - name: Unzip custom PHP binary
+        run: |
+          cd "$GITHUB_WORKSPACE/custom-php"
+          unzip -q php-cli-8.4-linux-x86_64.zip -d linux-x86_64
 
       - name: Use custom PHP binary
         run: |
           # path to your committed binary
           BIN_DIR="$GITHUB_WORKSPACE/custom-php/linux-x86_64"
           chmod +x "$BIN_DIR/php"
-          # Put your php ahead of system php (affects all next steps)
+          # Update PATH for current shell AND future steps
+          export PATH="$BIN_DIR:$PATH"
           echo "$BIN_DIR" >> "$GITHUB_PATH"
           # Prove we're now on your binary
           which php
@@ -48,10 +47,21 @@ jobs:
           # (Optional) quick sqlite-vec smoke test if you want:
           php -r 'echo (new SQLite3(":memory:"))->querySingle("SELECT vec_version()"), PHP_EOL;'
 
-      - name: Setup problem matchers
+      - name: Verify custom PHP in new step
         run: |
-          echo "::add-matcher::${{ runner.tool_cache }}/php.json"
-          echo "::add-matcher::${{ runner.tool_cache }}/phpunit.json"
+          echo "PATH is: $PATH"
+          which php
+          php -v
+          php -m | grep -i sqlite
+          php -r 'echo (new SQLite3(":memory:"))->querySingle("SELECT vec_version()"), PHP_EOL;'
+
+      - name: Install Composer
+        run: |
+          php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+          php composer-setup.php --quiet
+          php -r "unlink('composer-setup.php');"
+          sudo mv composer.phar /usr/local/bin/composer
+          composer --version
 
       - name: Install dependencies
         run: |
